@@ -10,7 +10,7 @@ const io = socketio(httpServer);
 
 app.use(express.static(path.join(__dirname, 'src')));
 
-const botName = 'Chat Bot';
+const botName = 'AnonChat Bot';
 
 io.on("connection", (socket) => {
   // contains all user connection info like IP Address

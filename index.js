@@ -4,7 +4,7 @@ const io = require('socket.io-client');
 
 console.log(__dirname);
 let mainWindow;
-let page = './src/index.html';
+const page = './src/index.html';
 
 const createWindow = () => {
     mainWindow = new BrowserWindow({
