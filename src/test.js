@@ -3,10 +3,14 @@ const conversation = document.querySelector('#conversation');
 const roomName = document.getElementById('room-name');
 const usersElm = document.getElementById('users');
 
-const socket = io('http://predator:3000');
+const { username, room } = Qs.parse(location.search, {
+    ignoreQueryPrefix: true,
+});
 
-let room = 'Kreiosia';
-let username = 'Melvin';
+const socket = io('http://localhost:3000');
+
+// let room = 'Kreiosia';
+// let username = 'Melvin';
 socket.emit('joinRoom', { username, room });
 
 // Get room and users
