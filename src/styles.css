@@ -1,0 +1,23 @@
+main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px;
+    background-color: #efefef;
+}
+
+aside {
+    border: 1px black solid;
+}
+
+section {
+    border: 1px red solid;
+}
+
+#conversation {
+    max-height: 350px;
+    overflow-y: scroll;
+    border: 1px blue solid;
+}

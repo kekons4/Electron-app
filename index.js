@@ -1,5 +1,6 @@
 const { app, BrowserWindow, Menu, MenuItem } = require('electron');
 const path = require('path');
+const io = require('socket.io-client');
 
 console.log(__dirname);
 let mainWindow;
@@ -38,16 +39,25 @@ mainMenu.append(new MenuItem({
 // Add Dev tools Menu Item
 mainMenu.append(new MenuItem({
     label: 'Developer Tools',
-    submenu: [{
-        role: 'toggleDevTools',
-        accelerator: process.platform === 'darwin' ? 'Cmd+Shift+I' : 'Control+Shift+I',
-        click() {
-            console.log('Opening Dev Tools');
-            if(process.NODE_ENV !== 'production') {
-                mainWindow.webContents.openDevTools();
+    submenu: [
+        {
+            role: 'toggleDevTools',
+            accelerator: process.platform === 'darwin' ? 'Cmd+Shift+I' : 'Control+Shift+I',
+            click() {
+                console.log('Opening Dev Tools');
+                if(process.NODE_ENV !== 'production') {
+                    mainWindow.webContents.openDevTools();
+                }
             }
-        }
-    }]
+        },
+        {
+            role: 'Reload',
+            accelerator: process.platform === 'darwin' ? 'Cmd+R' : 'Control+R',
+            click() {
+                console.log('Refreshing Application...');
+                mainWindow.webContents.reload();
+            }
+        }]
 }))
 
 // Applies Menu to the App
