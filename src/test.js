@@ -3,9 +3,13 @@ const conversation = document.querySelector('#conversation');
 const roomName = document.getElementById('room-name');
 const usersElm = document.getElementById('users');
 
+let isForeground = true;
+
 const { username, room } = Qs.parse(location.search, {
     ignoreQueryPrefix: true,
 });
+
+sendNotification('', `You joined ${room} chat`);
 
 const socket = io('http://localhost:3000');
 
@@ -42,8 +46,15 @@ chatForm.addEventListener('submit', (e) => {
     e.target.elements.msg.focus();
 });
 
+document.addEventListener("visibilitychange", () => {
+    isForeground = !isForeground;
+});
+
+
 // Output messages from DOM
 function outputMessage(msg) {
+    // showNotification(msg.username, msg.txt);
+    sendNotification(msg.username, msg.txt);
     const div = document.createElement('div');
     div.classList.add('message');
     div.innerHTML = `<p>${msg.username} <span>${msg.time}</span></p>
@@ -64,4 +75,8 @@ function outputUsers(users) {
     usersElm.innerHTML = `
         ${users.map(user => `<li>${user.username}</li>`).join('')}
     `;
+}
+
+function sendNotification(title, msg) {
+    if(isForeground === false) new Notification(title, { body: msg }).onclick = () => document.getElementById("output").innerText = CLICK_MESSAGE;
 }

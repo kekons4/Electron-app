@@ -1,3 +1,5 @@
+const { BrowserWindow } = require("electron");
+
 window.addEventListener('DOMContentLoader', () => {
     const replaceText = (selector, text) => {
         const element = document.getElementById(selector);

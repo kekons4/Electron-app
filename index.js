@@ -1,10 +1,11 @@
-const { app, BrowserWindow, Menu, MenuItem } = require('electron');
+const { app, BrowserWindow, Menu, MenuItem, Notification } = require('electron');
 const path = require('path');
 const io = require('socket.io-client');
 
-console.log(__dirname);
 let mainWindow;
 const page = './src/index.html';
+
+let isFocused = true;
 
 const createWindow = () => {
     mainWindow = new BrowserWindow({
@@ -17,13 +18,32 @@ const createWindow = () => {
         }
     });
 
+    mainWindow.on('focus', () => {
+        // showNotification();
+        isFocused = true;
+    });
+
+    mainWindow.on('blur', () => {
+        // showNotification();
+        isFocused = false;
+    });
+
     mainWindow.loadFile(page);
+}
+
+const NOTIFICATION_TITLE = 'Kreios Chat has Started'
+const NOTIFICATION_BODY = 'Enjoy your chatting experience.'
+
+function showNotification(username, msg) {
+    if(isFocused === false){
+        new Notification({ title: username, body: msg }).show();
+    }
 }
 
 //Create Main Menu
 const mainMenu = new Menu();
 
-// Add Main Menu item with help page
+//Add Main Menu item with help page
 mainMenu.append(new MenuItem({
     label: 'Electron',
     submenu: [{
@@ -70,7 +90,7 @@ app.whenReady().then(() => {
     app.on('activate', () => {
         if(BrowserWindow.getAllWindows().length === 0) createWindow();
     });
-});
+}).then(showNotification);
 
 // When app is being closed 
 app.on('window-all-closed', () => {
