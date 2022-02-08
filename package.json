@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "first electron app that i have created",
   "main": "index.js",
+  "build": {
+    "appId": "com.my-website.my-app",
+    "productName": "MyApp",
+    "copyright": "Copyright © 2022 ${author}"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron-forge start",

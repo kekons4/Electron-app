@@ -86,6 +86,7 @@ Menu.setApplicationMenu(mainMenu);
 
 // When electron is ready
 app.whenReady().then(() => {
+    if(process.platform === 'win32') app.setAppUserModelId("AnonChat");
     createWindow();
 
     app.on('activate', () => {
