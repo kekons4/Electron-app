@@ -7,7 +7,11 @@ const { userJoin, getCurrentUser, userLeave, getRoomUsers } = require('./utils/u
 const app = express();
 const httpServer = createServer(app);
 const io = socketio(httpServer);
+const mongoose = require('mongoose');
+const Router = require('./routes');
 
+app.use(express.json());
+app.use(Router);
 app.use(express.static(path.join(__dirname, 'src')));
 
 const botName = 'AnonChat Bot';
@@ -64,3 +68,21 @@ io.on("connection", (socket) => {
 const PORT = 3000 || process.env.PORT;
 
 httpServer.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+
+mongoose.connect('mongodb+srv://cluster0.xpxpy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+  {
+    user: 'kekons4',
+    pass: 'Paladinware#!1'
+  },
+  {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true
+  }
+);
+
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error: "));
+db.once("open", function () {
+  console.log("Connected successfully");
+});

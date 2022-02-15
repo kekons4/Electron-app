@@ -46,6 +46,7 @@ chatForm.addEventListener('submit', (e) => {
     e.target.elements.msg.focus();
 });
 
+// Checks if the application window is in focus
 document.addEventListener("visibilitychange", () => {
     isForeground = !isForeground;
 });
