@@ -2,6 +2,8 @@ const chatForm = document.getElementById('chatForm');
 const conversation = document.querySelector('#conversation');
 const roomName = document.getElementById('room-name');
 const usersElm = document.getElementById('users');
+const themeElm = document.getElementById('theme');
+
 
 let isForeground = true;
 
@@ -81,3 +83,20 @@ function outputUsers(users) {
 function sendNotification(title, msg) {
     if(isForeground === false) new Notification(title, { body: msg }).onclick = () => document.getElementById("output").innerText = CLICK_MESSAGE;
 }
+
+// Controls global theme CSS of the site
+themeElm.addEventListener('change', (e) => {
+    e.preventDefault();
+    const theme = e.target.value;
+    console.log(theme);
+    const styleSheet = document.querySelector('link');
+    if(theme === 'dark') {
+        styleSheet.href = './darktheme.css';
+        document.cookie = `theme=./darktheme.css`;
+    }
+    else if(theme === 'light') {
+        styleSheet.href = './styles.css';
+        document.cookie = `theme=./styles.css`;
+    }
+    else styleSheet.href = './styles.css';
+});
