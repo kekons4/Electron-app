@@ -1,6 +1,24 @@
 const express = require("express");
+const { Error } = require("mongoose");
 const userModel = require("./models");
 const app = express();
+
+// Login route
+app.post("/login", async (req, res) => {
+  const data = req.body;
+  console.log(data.username);
+  try{
+    const user = await userModel.findOne({username: data.username, password: data.password});
+    
+    if(!user) throw new Error('Account not found');
+    
+    console.log(user);
+    res.status(200).send(user);
+  } catch(err) {
+    console.log(err);
+    res.status(404).send('That Combination of username and password does not exist.');
+  }
+});
 
 app.get("/users", async (req, res) => {
     const users = await userModel.find({});

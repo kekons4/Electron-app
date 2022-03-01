@@ -28,6 +28,14 @@ section {
     border: 1px red solid;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
 #conversation {
     max-height: 350px;
     overflow-y: scroll;
