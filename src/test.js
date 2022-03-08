@@ -7,9 +7,11 @@ const themeElm = document.getElementById('theme');
 
 let isForeground = true;
 
-const { username, room } = Qs.parse(location.search, {
+let { username, room } = Qs.parse(location.search, {
     ignoreQueryPrefix: true,
 });
+
+username = getCookie('username');
 
 sendNotification('', `You joined ${room} chat`);
 
@@ -84,7 +86,7 @@ function sendNotification(title, msg) {
     if(isForeground === false) new Notification(title, { body: msg }).onclick = () => document.getElementById("output").innerText = CLICK_MESSAGE;
 }
 
-// Controls global theme CSS of the site
+// Controls global CSS theme of the site
 themeElm.addEventListener('change', (e) => {
     e.preventDefault();
     const theme = e.target.value;

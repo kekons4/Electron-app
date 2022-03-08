@@ -20,6 +20,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
+// Fetch all users
 app.get("/users", async (req, res) => {
     const users = await userModel.find({});
   
@@ -30,7 +31,8 @@ app.get("/users", async (req, res) => {
     }
 });
 
-app.post("/addUser", async (request, response) => {
+// Register new account
+app.post("/register", async (request, response) => {
     const user = new userModel(request.body);
   
     try {

@@ -17,21 +17,23 @@
             </select>
         </section>
         <section>
-            <div>
-                <h3>First Name:</h3>
-                <input type="text" placeholder="first name...">
-                <h3>Last Name:</h3>
-                <input type="text" placeholder="last name...">
-                <h3>Username:</h3>
-                <input type="text" placeholder="enter username...">
-                <h3>Password:</h3>
-                <input type="password" placeholder="enter password...">
-                <h3>Confirm Password:</h3>
-                <input type="password" placeholder="enter password...">
+            <form id="register">
+                <label for="fName">First Name:</label>
+                <input type="text" id="fName" placeholder="first name...">
+                <label for="lName">Last Name:</label>
+                <input type="text" id="lName" placeholder="last name...">
+                <label for="username">Username:</label>
+                <input type="text" id="username" placeholder="enter username...">
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="enter password...">
+                <label for="cPassword">Confirm Password:</label>
+                <input type="password" id="cPassword" placeholder="enter password...">
                 <button type="submit">Register</button>
-            </div>
+            </form>
         </section>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./cookieManager.js"></script>
+    <script src="./register.js"></script>
 </body>
 </html>

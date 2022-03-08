@@ -44,3 +44,4 @@ function getCookie(cname) {
   }
 
   setTheme();
+  checkCookie();
